@@ -13,13 +13,11 @@ AFloorSwitch::AFloorSwitch()
 
 	TriggerBox = CreateDefaultSubobject<UBoxComponent>(TEXT("TriggerBox"));
 	RootComponent = TriggerBox;
-
 	
 	TriggerBox->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
 	TriggerBox->SetCollisionObjectType(ECollisionChannel::ECC_WorldStatic);
 	TriggerBox->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Ignore);
 	TriggerBox->SetCollisionResponseToChannel(ECollisionChannel::ECC_Pawn, ECollisionResponse::ECR_Overlap);
-	
 
 	TriggerBox->SetBoxExtent(FVector(62.f, 62.f, 32.f));
 
@@ -37,6 +35,9 @@ void AFloorSwitch::BeginPlay()
 
 	TriggerBox->OnComponentBeginOverlap.AddDynamic(this, &AFloorSwitch::OnOverlapBegin);
 	TriggerBox->OnComponentEndOverlap.AddDynamic(this, &AFloorSwitch::OnOverlapEnd);
+
+	InitialDoorLocation = Door->GetComponentLocation();
+	InitialSwitchLocation = FloorSwitch->GetComponentLocation();
 	
 }
 
@@ -50,9 +51,28 @@ void AFloorSwitch::Tick(float DeltaTime)
 void AFloorSwitch::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	UE_LOG(LogTemp, Warning, TEXT("Overlap Begin."));
+	RaiseDoor();
+	LowerFloorSwitch();
 }
 
 void AFloorSwitch::OnOverlapEnd(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
 	UE_LOG(LogTemp, Warning, TEXT("Overlap End."));
+	LowerDoor();
+	RaiseFloorSwitch();
+}
+
+void AFloorSwitch::UpdateDoorLocation(float z)
+{
+	FVector NewLocation = InitialDoorLocation;
+	NewLocation.Z += z;
+	Door->SetWorldLocation(NewLocation);
+}
+
+
+void AFloorSwitch::UpdateFloorSwitchLocation(float z)
+{
+	FVector NewLocation = InitialSwitchLocation;
+	NewLocation.Z += z;
+	FloorSwitch->SetWorldLocation(NewLocation);
 }
