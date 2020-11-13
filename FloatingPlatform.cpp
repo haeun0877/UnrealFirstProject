@@ -15,6 +15,8 @@ AFloatingPlatform::AFloatingPlatform()
 
 	StartPoint = FVector(0.f);
 	EndPoint = FVector(0.f);
+	
+	InterpSpeed = 4.0f;
 }
 
 // Called when the game starts or when spawned
@@ -23,6 +25,7 @@ void AFloatingPlatform::BeginPlay()
 	Super::BeginPlay();
 	
 	StartPoint = GetActorLocation();
+	EndPoint += StartPoint;
 }
 
 // Called every frame
@@ -30,5 +33,10 @@ void AFloatingPlatform::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	FVector CurrentLocation = GetActorLocation();
+
+	FVector Interp = FMath::VInterpTo(CurrentLocation, EndPoint, DeltaTime, InterpSpeed);
+
+	SetActorLocation(Interp);
 }
 
