@@ -28,6 +28,16 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "PlatForm")
 	float InterpSpeed;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "PlatForm")
+	float InterpTime;
+
+	FTimerHandle InterpTimer;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "PlatForm")
+	bool bInterping;
+
+	float Distance;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -35,5 +45,9 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+	void ToggleInterping();
+
+	void SwapVectors(FVector& VecOne, FVector& VecTwo);
 
 };
