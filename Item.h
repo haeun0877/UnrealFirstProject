@@ -19,6 +19,12 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Item | Collision")
 	class USphereComponent* CollisionVolume;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Item | Mesh");
+	class UStaticMeshComponent* Mesh;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item | Particles")
+	class UParticleSystemComponent* IdleParticlesComponent;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
