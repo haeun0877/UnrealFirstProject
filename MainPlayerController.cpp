@@ -14,4 +14,6 @@ void AMainPlayerController::BeginPlay()
 	}
 	HUDOverlay->AddToViewport();
 	HUDOverlay->SetVisibility(ESlateVisibility::Visible);
+
+	UE_LOG(LogTemp, Warning, TEXT("MainPlayCOntroller Begin"));
 }
