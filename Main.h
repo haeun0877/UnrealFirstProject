@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ // Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -27,6 +27,27 @@ public:
 	float BaseTurnRate;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera)
 	float BaseLookUpRate;
+
+	/**
+	/*
+	/* Player Stats
+	/*
+	*/
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Player Stats")
+	float MaxHealth;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player Stats")
+	float Health;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Player Stats")
+	float MaxStamina;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player Stats")
+	float Stamina;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player Stats")
+	int32 Coins;
 
 protected:
 	// Called when the game starts or when spawned
