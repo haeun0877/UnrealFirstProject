@@ -11,9 +11,11 @@ void AMainPlayerController::BeginPlay()
 	if (HUDOverlayAsset)
 	{
 		HUDOverlay = CreateWidget<UUserWidget>(this, HUDOverlayAsset);
-	}
-	HUDOverlay->AddToViewport();
-	HUDOverlay->SetVisibility(ESlateVisibility::Visible);
+		HUDOverlay->AddToViewport();
+		HUDOverlay->SetVisibility(ESlateVisibility::Visible);
 
-	UE_LOG(LogTemp, Warning, TEXT("MainPlayCOntroller Begin"));
+		UE_LOG(LogTemp, Warning, TEXT("MainPlayCOntroller Begin"));
+	}
+
+
 }
